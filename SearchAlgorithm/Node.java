@@ -13,9 +13,10 @@
 public class Node{
 	private Node next;
 	private Node previous;
-	private String label;
 	private int distance;
 	private boolean visited;
+	private String label;
+		
 	
 	public Node(String s){
 		initVars(s, null, null);
@@ -68,6 +69,7 @@ public class Node{
 	public boolean getVisited(){
 		return this.visited;
 	}
+	
 	public String nodeLabel(){
 		return this.label;
 	}

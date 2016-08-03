@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
 	Author	: Tom Choi
 	Date	: 08/03/2016
@@ -19,6 +21,9 @@ public class Dijsktra extends Graph{
 		distanceArray = new int[nodes.length];
 	}
 	
+	/*
+		Find and print the shortest distance from the source to each node in the graph
+	*/
 	public void traverse(Node s){
 		setStart(s);
 		initDistanceArray();
@@ -37,7 +42,8 @@ public class Dijsktra extends Graph{
 			// find the index of the min node and set it visited
 			minIndex = minDistance();
 			Node minNode = nodes[minIndex];
-			minNode.setVisited(true);
+			minNode.setVisited(true);	
+			
 			Node[] adjacent = findAdjacentNodes(minNode);
 			
 			// for each adjacent node
@@ -48,17 +54,46 @@ public class Dijsktra extends Graph{
 				index = findIndex(adjacent[j]);
 				
 				// if the total weight of path from the start to the node
-				// is less than the current weight of the node, update
+				// is less than the current weight of the node,
+				// update its weight and set its previous node for back-tracking
 				if(	distanceArray[index] > updatedWeight){
 					distanceArray[index] = updatedWeight;
+					n.setPrevious(minNode);
 				}
 			}
 		}
 		printShortestDistance();
 	}
 	
-	public void shortestPath(Node start, Node goal){
+	/*
+		Find and print the shortest path from the start to the goal
+	*/
+	public void shortestPath(Node s, Node goal){
+		traverse(s);
+		findPathToGoal(goal);
+	}
+	
+	/*
+		Find the distance from the start to the goal and
+		Back traces the path from the goal to the start
+	*/
+	private void findPathToGoal(Node goal){
+		int index = findIndex(goal);
+		int shortestDistance = distanceArray[index];
 		
+		ArrayList<String> path = new ArrayList<String>();
+		Node current = goal;
+		
+		while(current != null){
+			path.add(current.nodeLabel());
+			current = current.getPrevious();
+		}
+		
+		System.out.print("The shortest path from \'" + start.nodeLabel() + "\' to \'" +
+							goal.nodeLabel() + "\' is: ");
+		for(int i = path.size()-1; i >= 0; i--){
+			System.out.print(path.get(i) + " ");
+		}System.out.println("\nAnd the distance to the goal is: " + shortestDistance);
 	}
 	
 	private void printShortestDistance(){
@@ -121,6 +156,6 @@ public class Dijsktra extends Graph{
 						{0, 0, 2, 0, 0, 0, 6, 7, 0}};
 		
 		Dijsktra dijsktra = new Dijsktra(nodes, edges);
-		dijsktra.traverse(nodes[0]);
+		dijsktra.shortestPath(nodes[0], nodes[4]);
 	}
 }

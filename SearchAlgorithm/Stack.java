@@ -3,7 +3,7 @@
 	Date	: 08/02/2016
 	Purpose	: Carleton College Summer Computer Science Institute (SCSI)
 	
-	Implementation of basic stack with FILO (First In, Last Out)
+	Implementation of basic stack with LIFO (Last In, First Out)
 		- push		: add an item to the stack
 		- popped	: remove and return the item pushed the last
 		- clear		: clear the stack
