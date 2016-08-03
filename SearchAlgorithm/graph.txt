@@ -1,0 +1,19 @@
+
+
+					e  -------|
+				  /   \       |
+		    d  - b     c    - f
+			|   / \   /
+			|  h    a
+			|   |   |
+			|   j   |
+			|   |   |
+			|-  i -  g
+			
+idea : need to keep track of breath distance from the start
+
+1. for each node add breath first search distance from the source
+2. obtain the search result from BFS
+3. construct the tree based on the result
+4. find the path from the start to the goal by looking at the connect
+	from each layer to the other
